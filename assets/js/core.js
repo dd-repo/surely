@@ -1,10 +1,27 @@
 "use strict";
 var Actions = {
+        // starts dbx
+        dbxInit: function(dbxToken) {
+          // console.log("Setting token cookie");
+          Cookies.set('dbxtoken', dbxToken);
+          window.location = "/dashboard";
+        },
+
         setColorScheme: function(a, b) {
             $("body").attr("data-scheme", a), $("body").attr("data-color", b)
         },
+
+        // Sets the header to be sticky (service) or non like the (home)
         setHeaderType: function(a) {
-            "home" == a ? ($("body").addClass("home"), $("#header").removeClass("header-portable")) : ($("body").removeClass("home"), $("#header").addClass("header-portable"))
+            // "home" == a ? ($("body").addClass("home"), $("#header").removeClass("header-portable")) : ($("body").removeClass("home"), $("#header").addClass("header-portable"))
+
+            if ("home" == a) {
+              ($("body").addClass("home"), $("#header").removeClass("header-portable"))
+            } else if ("portable" == sections[a].headerType) {
+              ($("body").addClass("home"), $("#header").addClass("header-portable"))
+            } else {
+              ($("body").removeClass("home"), $("#header").addClass("header-portable"))
+            }
         },
         slideUpdateView: function(a) {
             var b = a.find(".swiper-slide-active"),
@@ -16,30 +33,39 @@ var Actions = {
             f.removeClass("active"), g.addClass("active"), Actions.setColorScheme(d, e)
         },
         changeView: function(a) {
-            console.log("changeView Called");
             currentView = a;
             var b = $("#content"),
                 c = b.find(".section.visible"),
                 d = c.attr("id"),
                 e = (sections[a], sections[d], $("#mobile-title")),
+
+                // Changes the title
                 f = function(a) {
                     "home" == a ? (document.title = titleBase,
                       e.text("")) : (document.title = titleBase + " - " + sections[a].name,
                       "en" == userLang ? e.text(sections[a].name) : e.text(sections[a]["name-" + userLang]))
                 },
+
+                //
                 g = function(a) {
-                    firstLoading && ($("body").addClass("site-loaded"),
-                      firstLoading = !1),
+                    firstLoading && ($("body").addClass("site-loaded"), firstLoading = !1),
                       c.removeClass("visible"), b.children("#" + a).show(0, function() {
                         setTimeout(function() {
                             c.hide(0), $("body").removeClass("loading")
                         }, 600), $(this).addClass("visible")
-                    }), f(a), Actions.setColorScheme(sections[a].scheme,
-                                                      sections[a].color),
-                                                      Actions.setHeaderType(a),
-                                                      Actions.markMenuItem(a),
-                                                      $(".typing").html('<span id="typing-text" class="typing-text"></span>'),
-                                                      Components.typingText()
+                      }),
+                      f(a),
+
+                      Actions.setColorScheme(sections[a].scheme, sections[a].color),
+                      Actions.setHeaderType(a),
+
+                      // checks if the button is in the main-nav to markMenuItem
+                      // $("#main-nav").find("a[href=" + a + "]").length || a == 'home' ? Actions.markMenuItem(a) : console.log();
+                      Actions.markMenuItem(a),
+                      // console.log("a");
+
+                      $(".typing").html('<span id="typing-text" class="typing-text"></span>'),
+                      Components.typingText()
                 };
 
             if ($("body").removeClass("mobile-nav-open"), a != c.attr("id"))
@@ -64,11 +90,13 @@ var Actions = {
             var b = $("#main-nav"),
                 c = $("#nav-selector"),
                 d = $("#mobile-nav");
-            if (b.find("li.active").removeClass("active"),
-                d.find("li.active").removeClass("active"),
-                b.find("a[href=" + a + "]").parent("li").addClass("active"),
-                d.find("a[href=" + a + "]").parent("li").addClass("active"),
-                !$("body").hasClass("home")) {
+            if (
+                  b.find("li.active").removeClass("active"),
+                  d.find("li.active").removeClass("active"),
+                  b.find("a[href=" + a + "]").parent("li").addClass("active"),
+                  d.find("a[href=" + a + "]").parent("li").addClass("active"),
+                  !$("body").hasClass("home")// || !$("body").hasClass("home")
+                ) {
                 var e = b.find("li.active");
                 c.css({
                     left: e.offset().left - b.offset().left - 4 + "px",
@@ -81,7 +109,18 @@ var Actions = {
         init: function() {
             this.textSwiper(), this.bgSwiper(), this.typingText(),
             this.servicesSwiper(), this.productsSwiper(), this.projectsSwiper(),
-            this.popUp(), this.ajaxModal(), this.forms()
+            this.popUp(), this.ajaxModal(), this.forms(), this.checkLogin()
+        },
+        checkLogin: function() {
+          var path = window.location.pathname;
+          
+          if (path == '/dashboard'){
+            window.location = "/dashboard/";
+          }
+          if (Cookies.get('dbxtoken')){
+            $('#header-login-btn').html('Dashboard');
+            // console.log("asdf");
+          }
         },
         textSwiper: function() {
             var a = $(".text-swiper");
@@ -163,7 +202,8 @@ var Actions = {
             function a(a, b) {
                 return Math.floor(Math.random() * (b - a + 1)) + a
             }
-            var b = [["Whould you like to work with me?", "Let's create something together! ^1000 <a href='contact' data-change-view='true' class='text-primary'>Get free quote!</a>"]],
+
+            var b = [["Whould you like to work with us?", "Let's create something together! ^1000 <a href='contact' data-change-view='true' class='text-primary'>Get free quote!</a>"]],
                 c = [["Chciałbyś ze mną współpracować?", "Stwórzmy coś razem! ^1000 <a href='contact' data-change-view='true' class='text-primary'>Otrzymaj darmową wycenę!</a>"]],
                 d = $("#typing-text"),
                 e = function() {
@@ -228,27 +268,83 @@ var Actions = {
                     }
                 }
             });
-            var $loginForm = $("#login-form");
-            $loginForm.length > 0 && $loginForm.submit(function() {
-                var $loginForm,
+
+
+            // functions
+            function getParameterByName(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+
+            //dbxlogin
+            if (currentView == 'dbxlogin'){
+              $.getScript('assets/js/dbx-sdk.min.js', function()
+              {
+                var dbxToken = getParameterByName('dbxtoken'); // "lorem"
+                // window.location.pathname gets current path
+                window.history.pushState('obj', 'Subely', '?view=dbxlogin');
+                // console.log(getParameterByName('dbxtoken'));
+
+                // "en" == userLang ? e.text(sections[a].name) : e.text(sections[a]["name-" + userLang]))
+                console.log(Cookies.get('token') == null);
+                if (Cookies.get('dbxtoken') == null && dbxToken != null) {
+                  // console.log("No Token Cookie and there is a [get]dbxtoken ");
+                  Actions.dbxInit(dbxToken);
+                } else if (Cookies.get('dbxtoken')) {
+                  window.location = "/dashboard";
+                  // console.log("redirect");
+                }
+
+                // console.log(dbxToken);
+
+/*                var dbx = new Dropbox({ accessToken: 'YOUR_ACCESS_TOKEN_HERE' });
+
+                dbx.filesListFolder({path: ''})
+                  .then(function(response) {
+                    console.log(response);
+                  })
+                  .catch(function(error) {
+                    console.log(error);
+                  });
+*/
+              });
+            }
+            // Login
+            var a = $("#login-form");
+            a.length > 0 && a.submit(function() {
+                var a,
                     b = $(this).find(".btn-submit"),
                     c = $(this);
+                    console.log(c.valid());
                 return !!c.valid() && (b.addClass("loading"), $.ajax({
                         type: c.attr("method"),
                         url: c.attr("action"),
+                        crossDomain: true,
                         data: c.serialize(),
                         cache: !1,
-                        dataType: "jsonp",
-                        jsonp: "c",
+                        dataType: "json",
+                        // jsonp: "c",
+                        crossDomain: true,
                         contentType: "application/json; charset=utf-8",
-                        error: function(a) {
+                        error: function(responseData, textStatus, jqXHR) {
+                          var value = responseData.someKey;
                             setTimeout(function() {
                                 b.addClass("error")
+                                console.log("qwe");
+
                             }, 1200)
                         },
                         success: function(c) {
-                            console.log(c), $loginForm = "success" != c.result ? "error" : "success", setTimeout(function() {
-                                b.addClass($loginForm)
+                          console.log("sdf");
+                            console.log(c), responseData = "success" != c.result ? "error" : "success", setTimeout(function() {
+                              console.log("aaaa");
+
+                                b.addClass(responseData)
                             }, 1200)
                         },
                         complete: function() {
@@ -258,6 +354,7 @@ var Actions = {
                         }
                     }), !1)
             });
+            // Signin page
             var a = $("#sign-in-form");
             a.length > 0 && a.submit(function() {
                 var a,
@@ -337,7 +434,9 @@ var titleBase = document.title,
             scheme: "dark",
             ajax: !0,
             external: !1,
-            loaded: !1
+            loaded: !1,
+            headerType: "home"
+
         },
         products: {
             index: 2,
@@ -394,20 +493,20 @@ var titleBase = document.title,
             external: !1,
             loaded: !1
         },
-        login: {
-            index: 5,
-            name: "Sign In",
-            "name-pl": "Newsletter",
-            target: "login.html",
-            color: "blue",
+        dbxlogin: {
+            index: 6,
+            name: "Login",
+            target: "dbxlogin.html",
+            color: "green",
             scheme: "dark",
             ajax: !0,
             external: !1,
-            loaded: !1
+            loaded: !1,
+            headerType: "portable"
         },
         themes: {
-            name: "Premium Themes",
-            target: "http://themeforest.net/user/suelo/portfolio?ref=suelo",
+            name: "DevDuo",
+            target: "http://subely.com/user/Subely/portfolio?ref=Subely",
             color: "blue",
             scheme: "dark",
             ajax: !1,
@@ -452,23 +551,29 @@ var titleBase = document.title,
         $.query.get("view") || (currentView = "home"),
         $.query.get("lang") && (userLang = $.query.get("lang"))
     },
+
     changeURI = function(a) {
         $.query.SET("view", a);
         var b = $.query.SET("view", a);
         popstate || history.pushState(currentView, null, b.toString()), popstate = !1
     };
 
+checkURI(),
 
-    checkURI(),
-    "pl" != userLang && (userLang = "en"),
-    $("#header").load("views/" + userLang + "/header.html"),
-    $("#mobile-nav").load("views/" + userLang + "/mobile-nav.html"),
-    Actions.changeView(currentView);
+"pl" != userLang && (userLang = "en"),
+$("#header").load("views/" + userLang + "/header.html"),
+$("#mobile-nav").load("views/" + userLang + "/mobile-nav.html"),
+Actions.changeView(currentView);
 
 var popstate = !1;
+
 window.addEventListener("popstate", function(a) {
     popstate = !0, checkURI(), Actions.changeView(currentView)
-}), $(document).ready(function() {
+}),
+
+$(document).ready(function() {
+    // Cookies.get('dbxtoken') != null ? ($('#header-login-btn').html('Dashboard'), console.log("s")) : $('#header-login-btn').html('ss');
+
     $("body").delegate('a[data-change-view="true"]', "click", function() {
         var a = $(this).attr("href");
         return Actions.changeView(a), !1
@@ -476,6 +581,8 @@ window.addEventListener("popstate", function(a) {
         var a = $(this).attr("data-lang");
         return window.location.search = jQuery.query.set("lang", a), console.log(a), !1
     }), MobileNav.init()
-}), $(window).resize(function() {
+}),
+
+$(window).resize(function() {
     Actions.markMenuItem(currentView)
 });
