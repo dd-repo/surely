@@ -2,6 +2,6 @@
 `python -m SimpleHTTPServer 8080`
 
 # TODO
-- [] Make a global footer
-- [] Change core.js to new framework (react alternative)
-- [] Encrypt the posted password
+- [ ] Make a global footer
+- [ ] Change core.js to new framework (react alternative)
+- [ ] Encrypt the posted password
