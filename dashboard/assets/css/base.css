@@ -951,7 +951,7 @@ body[data-color='green'] .bg-primary, body[data-color='green'] body[data-color='
   left: 0;
   right: 0;
   z-index: 777;
-  padding: 20px 60px;
+  padding: 20px 120px;
   color: #fff;
   -webkit-transition: all 0.4s ease-out;
   -moz-transition: all 0.4s ease-out;
@@ -1101,6 +1101,100 @@ body[data-color='green'] .bg-primary, body[data-color='green'] body[data-color='
 #header.header-portable .header-wrapper {
   margin-top: 0;
 }
+
+#header .right-header {
+  float: right;
+}
+
+#header ul.dropdown-menu {
+  left: -60px;
+}
+#header .triangle {
+  width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-bottom: 4px solid white;
+  display:block;
+  position: relative;
+  top: -9px;
+  left: 100px
+}
+
+#header .dropdown-menu i {
+  float: right;
+  padding-top: 3px;
+}
+
+#header a.dropdown-toggle.left-header-btn{
+  padding: 2px 20px;
+}
+
+#header .logo {
+  top: -5px;
+}
+
+#header .logo-text {
+  float: left;
+  padding-left: 5px;
+  font-family: Avenir;
+  top: 3px;
+  letter-spacing: -1px;
+  font-size: 20px;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd){
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+#subs {
+  /*margin-top: 30%;*/
+}
+
+#sub .vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+.ffixed {
+  position: fixed;
+}
+
+#subs .card {
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px #2a2a2a;
+}
+
+#subs td {
+  padding: 15px 20px;
+}
+
+#subs th {
+  padding: 10px 20px;
+}
+
+#subs td a {
+  color: #496423;
+  font-size: 16px
+}
+
+#subs td i {
+  color: rgb(0, 197, 0);
+}
+
+#subs .fright {
+  float: right;
+}
+
+#subs .btn {
+   font-weight: bold;
+}
+
 
 body[data-scheme='light'] #header {
   color: #282828;
@@ -6661,7 +6755,8 @@ body.popup-open #contact .contact-popup .popup-wrapper {
 /* Portfolio
 	------------------------------------------- */
 #portfolio {
-  cursor: move;
+  cursor: default;
+  /*cursor: move;*/
 }
 
 #portfolio .portfolio-bgs {
@@ -7200,7 +7295,7 @@ pre {
   border: none;
   font-size: 14px;
   font-weight: 300;
-  background: none;
+  /*background: none;*/
   z-index: 1;
   margin-bottom: 2px;
   color: #fff;

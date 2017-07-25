@@ -15,7 +15,7 @@ var Actions = {
             // "home" == a ? ($("body").addClass("home"), $("#header").removeClass("header-portable")) : ($("body").removeClass("home"), $("#header").addClass("header-portable"))
 
             if ("home" == a) {
-              ($("body").addClass("home"), $("#header").removeClass("header-portable"))
+              ($("body").addClass("home"), $("#header").addClass("header-portable"))
             } else if ("portable" == sections[a].headerType) {
               ($("body").addClass("home"), $("#header").addClass("header-portable"))
             } else {
@@ -263,6 +263,10 @@ var Actions = {
                 }
             });
 
+            $("button").click(function(){
+                $("p").toggleClass("main");
+            });
+
             //dbxlogin
             if (currentView == 'dbxlogin'){
               $.getScript('assets/js/dbx-sdk.min.js', function()
@@ -332,6 +336,14 @@ var Actions = {
                         }
                     }), !1)
             });
+
+            var logout_btn = $("#logout");
+            logout_btn.length > 0 && logout_btn.click(function() {
+              Cookies.remove('dbxtoken');
+              window.location = "/?view=dbxlogin";
+              console.log("Logout");
+            });
+
             // Signin page
             var a = $("#sign-in-form");
             a.length > 0 && a.submit(function() {
@@ -413,7 +425,7 @@ var titleBase = document.title,
             ajax: !0,
             external: !1,
             loaded: !1,
-            headerType: "home"
+            headerType: "portable"
 
         },
         products: {

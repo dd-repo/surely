@@ -42,52 +42,116 @@
 <!-- Header / End -->
 
 <!-- Content -->
-<div id="content">
-    <section id="home" class="section dark bg-black">
-
-        <!-- BG Slideshow -->
-        <div class="bg-swiper">
-            <div class="bg-image animated infinite zooming" style="background-image: url('assets/img/photos/bg-home01.jpg')";></div>
-            <div class="bg-image animated infinite zooming" style="background-image: url('assets/img/photos/bg-home03.jpg')";></div>
-            <div class="bg-image animated infinite zooming" style="background-image: url('assets/img/photos/bg-home02.jpg')";></div>
-            <div class="bg-image animated infinite zooming" style="background-image: url('assets/img/photos/bg-home04.jpg')";></div>
-        </div>
+<div class="container" id="content">
+    <section id="home" class="section dark bg-black" style="background-image: url('assets/img/photos/bg-space-grey.jpg')">
 
         <div class="section-wrapper">
 
-            <div class="home-wrapper">
+            <div class="" style="position: relative;position: relative;
+padding-bottom: 160px;
+padding-top: 100px;
+height: 100vh;">
 
-                <!-- Middle -->
-                <div class="home-middle v-center">
-                    <div class="text-swiper">
-                        <div class="swiper-wrapper">
-                            <h1 class="swiper-slide">Creative &amp; effective <strong>front-end</strong> development</h1>
-                            <h1 class="swiper-slide"><strong>Modren</strong> design &amp; <strong>impressive</strong> effects</strong></h1>
-                            <h1 class="swiper-slide">Over <strong>1k</strong> happy clients all over the world!</h1>
-                            <h1 class="swiper-slide">Let’s <strong>create</strong> something together!</h1>
-                        </div>
+                <div class="home-middle v-center" style="z-index: 10;">
+
+                  <div id="subs" class="vertical-center">
+                    <div class="col-md-10 col-md-offset-1">
+                      <div class="input-group">
+                          <input id="filter" type="text" class="form-control" placeholder="Type here...">
+                      </div>
+                      <table class="table card">
+                          <thead>
+                              <tr>
+                                  <th class="col-md-4">Host</th>
+                                  <th class="col-md-1">Status</th>
+                                  <th class="col-md-2">Created</th>
+                              </tr>
+                          </thead>
+                          <tbody class="searchable">
+                              <tr class="cell">
+                                  <td><a href="#">www.example.com</a></td>
+                                  <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                  <td>Lets get to work!</td>
+                                  <td class=""><button type="button" class="btn btn-xs btn-danger fright">Delete</button></td>
+                              </tr>
+                              <tr class="cell">
+                                  <td><a href="#">www.example.com</a></td>
+                                  <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                  <td>1 minute ago</td>
+                                  <td class=""><button type="button" class="btn btn-xs btn-danger fright">Delete</button></td>
+                              </tr>
+                              <tr class="cell">
+                                  <td><a href="#">www.example.com</a></td>
+                                  <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                  <td>8 months ago</td>
+                                  <td><button type="button" class="btn btn-xs btn-danger fright">Delete</button></td>
+                              </tr>
+                              <tr class="cell">
+                                  <td><a href="#">www.example.com</a></td>
+                                  <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                  <td>10 months ago</td>
+                                  <td><button type="button" class="btn btn-xs btn-danger fright">Delete</button></td>
+                              </tr>
+                              <!-- <tr class="cell">
+                                  <td><a href="#">www.example.com</a></td>
+                                  <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                  <td>2 years ago</td>
+                                  <td><button type="button" class="btn btn-xs btn-danger fright">Delete</button></td>
+                              </tr>
+                              <tr class="cell">
+                                  <td><a href="#">www.example.com</a></td>
+                                  <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                  <td>2 years ago</td>
+                                  <td><button type="button" class="btn btn-xs btn-danger fright">Delete</button></td>
+                              </tr>
+                              <tr class="cell">
+                                  <td><a href="#">www.example.com</a></td>
+                                  <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                  <td>2 years ago</td>
+                                  <td><button type="button" class="btn btn-xs btn-danger fright">Delete</button></td>
+                              </tr>
+                              <tr class="cell">
+                                  <td><a href="#">www.example.com</a></td>
+                                  <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                  <td>2 years ago</td>
+                                  <td><button type="button" class="btn btn-xs btn-danger fright">Delete</button></td>
+                              </tr> -->
+                              <tr class="cell">
+                                  <td><a href="#">www.example.com</a></td>
+                                  <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                  <td>2 years ago</td>
+                                  <td><button type="button" class="btn btn-xs btn-danger fright">Delete</button></td>
+                              </tr>
+                              <tr class="cell">
+                                  <td><a href="#">www.example.com</a></td>
+                                  <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                  <td>2 years ago</td>
+                                  <td><button type="button" class="btn btn-xs btn-danger fright">Delete</button></td>
+                              </tr>
+                              <tr class="cell">
+                                  <td><a href="#">www.example.com</a></td>
+                                  <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                  <td>2 years ago</td>
+                                  <td><button type="button" class="btn btn-xs btn-danger fright">Delete</button></td>
+                              </tr>
+                          </tbody>
+                      </table>
+
                     </div>
+                  </div>
                 </div>
-
                 <!-- Bottom -->
                 <div class="home-bottom container">
 
                     <!-- Buttons -->
                     <div class="home-buttons row">
-                        <div class="col-lg-3 col-lg-push-3 col-md-4 col-md-push-2 col-sm-6">
-                            <a href="services" data-change-view="true" class="btn btn-block btn-home btn-home-main"><span>View <strong>Services</strong></span><i class="ti-arrow-right"></i></a>
+                        <div class="col-lg-3 col-lg-push-3 col-md-4 col-md-push-2 col-sm-6" style=" position: fixed; z-index: 9;">
+                            <a href="services" data-change-view="true" class="btn btn-block btn-home btn-home-main ffixed"><span>View <strong>Services</strong></span><i class="ti-arrow-right"></i></a>
                         </div>
                         <div class="col-lg-3 col-lg-push-3 col-md-4 col-md-push-2 col-sm-6">
                             <a href="portfolio" data-change-view="true" class="btn btn-block btn-home btn-link"><span>Browse <strong>Porftolio</strong></span><i class="ti-arrow-right"></i></a>
                         </div>
                     </div>
-
-                    <!-- Social Media -->
-                    <ul class="social-media list-inline text-center">
-                        <li class="facebook"><a href="https://www.facebook.com/Subely" target="_blank" title="Follow on Facebook"><i class="fa fa-facebook"></i>Follow on <strong>Facebook</strong></a></li>
-                        <li class="twitter"><a href="https://twitter.com/Subely" target="_blank" title="Follow on Twitter"><i class="fa fa-twitter"></i>Follow on <strong>Twitter</strong></a></li>
-                        <li class="envato"><a href="http://subely.com/user/Subely/portfolio?ref=Subely" target="_blank" title="Follow on Envato"><i class="flaticon-logo137"></i>Follow on <strong>Envato</strong></a></li>
-                    </ul>
                 </div>
 
             </div>
