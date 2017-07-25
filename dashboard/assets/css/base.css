@@ -1147,16 +1147,25 @@ body[data-color='green'] .bg-primary, body[data-color='green'] body[data-color='
   background-color: rgba(0, 0, 0, 0.06);
 }
 
-#subs {
-  /*margin-top: 30%;*/
+
+.subs-wrapper {
+  min-height: 100%;
+  position: relative;
+  padding-top: 200px;
 }
 
-#sub .vertical-center {
-  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-  min-height: 100vh; /* These two lines are counted as one :-)       */
+.subs-header {
+  position: absolute;
+  border: 1px solid blue;
+}
+.subs-header-search {
 
-  display: flex;
-  align-items: center;
+}
+.subs-header-options {
+
+}
+
+#subs {
 }
 
 .ffixed {

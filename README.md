@@ -5,5 +5,6 @@
 
 # TODO
 - [ ] Make a global footer
-- [ ] Change core.js to new framework (react alternative)
+- [ ] Change core.js to vue.js (react alternative)
 - [ ] Encrypt the posted password
+- [ ] change to foundation
