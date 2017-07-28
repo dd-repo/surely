@@ -1151,12 +1151,14 @@ body[data-color='green'] .bg-primary, body[data-color='green'] body[data-color='
 .subs-wrapper {
   min-height: 100%;
   position: relative;
-  padding-top: 200px;
+  padding-top: 170px;
+  padding-bottom: 100px;
 }
 
 .subs-header {
   position: absolute;
-  border: 1px solid blue;
+  margin-bottom: 100px;
+  /*border: 1px solid blue;*/
 }
 .subs-header-search {
 
@@ -1181,6 +1183,7 @@ body[data-color='green'] .bg-primary, body[data-color='green'] body[data-color='
 
 #subs td {
   padding: 15px 20px;
+  vertical-align: middle;
 }
 
 #subs th {
@@ -1202,7 +1205,32 @@ body[data-color='green'] .bg-primary, body[data-color='green'] body[data-color='
 
 #subs .btn {
    font-weight: bold;
+   margin-right: 5px;
+   margin-left: 5px;
 }
+
+#subs .cell {
+  background-color: grey;
+  display: inline-block ;
+  width: 200px;
+  height: 350px;
+  margin: 10px 20px;
+}
+
+#subs .cell td {
+  display: block;
+}
+#subs th, td {
+    text-align: left;
+    padding: 8px;
+}
+#subs tr:nth-child(even) {
+  background-color: #f2f2f2
+
+}
+
+
+
 
 
 body[data-scheme='light'] #header {

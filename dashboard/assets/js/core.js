@@ -296,6 +296,21 @@ var Actions = {
 */
               });
             }
+
+            // search subs
+                (function ($) {
+
+                    $('#filter').keyup(function () {
+                        var rex = new RegExp($(this).val(), 'i');
+                        $('.searchable tr').hide();
+                        console.log(JSON.stringify($('.searchable tr')));
+                        $('.searchable tr').filter(function () {
+                            return rex.test($(this).text());
+                        }).show();
+                    })
+
+                }(jQuery));
+
             // Login
             var a = $("#login-form");
             a.length > 0 && a.submit(function() {

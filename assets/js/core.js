@@ -113,7 +113,7 @@ var Actions = {
         },
         checkLogin: function() {
           var path = window.location.pathname;
-          
+
           if (path == '/dashboard'){
             window.location = "/dashboard/";
           }
@@ -314,6 +314,7 @@ var Actions = {
 */
               });
             }
+
             // Login
             var a = $("#login-form");
             a.length > 0 && a.submit(function() {
