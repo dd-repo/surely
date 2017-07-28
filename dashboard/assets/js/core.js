@@ -300,6 +300,27 @@ var Actions = {
             // search subs
                 (function ($) {
 
+                  var $rows = $('table tr');
+                  $('#filter').keyup(function() {
+                      var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
+                          reg = RegExp(val, 'i'),
+                          text;
+
+                      $rows.show().filter(function() {
+                          text = $(this).text().replace(/\s+/g, ' ');
+                          return !reg.test(text);
+                      }).hide();
+
+                      console.log('done searching');
+
+                      if ($rows.find(':visible').length === 0) {
+                        $("#noResults").show();
+                      }
+                      else{
+                        $("#noResults").hide();
+                      }
+                  });
+
                     $('#filter').keyup(function () {
                         var rex = new RegExp($(this).val(), 'i');
                         $('.searchable tr').hide();
@@ -310,6 +331,14 @@ var Actions = {
                     })
 
                 }(jQuery));
+
+                $('#toggle-sub-view').on('click', function(e) {
+                  $('.searchable tr').toggleClass("cell"); //you can list several class names
+                  $('thead tr').toggleClass("hidden"); //you can list several class names
+                  $('table').toggleClass("card"); //you can list several class names
+                  e.preventDefault();
+                });
+
 
             // Login
             var a = $("#login-form");

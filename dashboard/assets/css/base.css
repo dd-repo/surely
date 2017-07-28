@@ -1209,21 +1209,58 @@ body[data-color='green'] .bg-primary, body[data-color='green'] body[data-color='
    margin-left: 5px;
 }
 
+#subs .subs--top--right {
+  float: right;
+  color: black;
+  margin-right: 20px;
+}
+
+#subs .subs--top--left {
+  float: left;
+  margin-bottom: 15px;
+}
+
+#subs .subs--top--right .no-animate > i {
+  opacity: 1;
+}
+
+#subs .subs--top--right .no-animate {
+  padding-left: 8px
+}
+
+#subs #noResults {
+  display: none;
+}
+
 #subs .cell {
-  background-color: grey;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px #2a2a2a;
   display: inline-block ;
   width: 200px;
-  height: 350px;
+  height: 300px;
   margin: 10px 20px;
+}
+
+#subs .cell td:first-child {
+  border: 0;
+}
+
+#subs .cell td:nth-child(3) {
+  width: 100%;
+  overflow-wrap: break-word;
 }
 
 #subs .cell td {
   display: block;
 }
+
 #subs th, td {
     text-align: left;
     padding: 8px;
 }
+
 #subs tr:nth-child(even) {
   background-color: #f2f2f2
 
