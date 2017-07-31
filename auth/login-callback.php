@@ -1,6 +1,10 @@
 <?php
+// var_dump(setcookie("TestCookie", 'sss'));
+setcookie("TestCookie", 'sssss', time()+3600, "/", "localhost:8080");
+
 use Kunnu\Dropbox\Dropbox;
 use Kunnu\Dropbox\DropboxApp;
+
 
 require_once 'header.php';
 
@@ -84,7 +88,7 @@ if (isset($_GET['code']) && isset($_GET['state'])) {
 		}
 
 		echo $httpCode;
-		$redirUrl = '../?view=dbxlogin&dbxtoken=' . $freshtoken;
+		$redirUrl = '../?view=dbxlogin&dbxtoken=' . $freshtoken . '&apitoken=' . $token;
 		redirect($redirUrl);
 
 		curl_close($handle);

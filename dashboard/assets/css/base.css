@@ -1258,7 +1258,7 @@ body[data-color='green'] .bg-primary, body[data-color='green'] body[data-color='
 
 #subs th, td {
     text-align: left;
-    padding: 8px;
+    padding-left: 20px;
 }
 
 #subs tr:nth-child(even) {
@@ -1266,9 +1266,45 @@ body[data-color='green'] .bg-primary, body[data-color='green'] body[data-color='
 
 }
 
+#home .modal-content {
+  margin-top: 100px;
+  color: black;
+}
 
+#home .modal-content button {
+  color: black;
+}
 
+#home .modal-content .btn-default {
+  background-color: rgb(242, 241, 238);
+}
 
+#home .modal-content .btn-default:hover {
+  background-color: rgb(221, 220, 218);
+}
+
+#home .modal-content .form-control {
+  color: black;
+  border-color: rgb(204, 204, 204);
+  /*box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 4px rgba(4, 4, 4, 0.6);*/
+  outline: 0 none;
+}
+
+#home .modal-content .form-control:focus {
+  border-color: rgb(152, 152, 152);
+}
+
+#home .modal-content .input-group {
+  margin-bottom: 20px;
+}
+
+#home .modal-content .title {
+  margin-top: 20px;
+}
+
+#home .site-add-message {
+  text-align: center;
+}
 
 body[data-scheme='light'] #header {
   color: #282828;

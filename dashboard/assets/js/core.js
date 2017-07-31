@@ -109,7 +109,113 @@ var Actions = {
             this.textSwiper(), this.bgSwiper(), this.typingText(),
             this.servicesSwiper(), this.productsSwiper(), this.projectsSwiper(),
             this.popUp(), this.ajaxModal(), this.forms(), this.checkLogin()
+
+            switch(currentView) {
+                case "home":
+                    Components.addSite();
+                    break;
+                case "Orange":
+                    text = "I am not a fan of orange.";
+                    break;
+                case "Apple":
+                    text = "How you like them apples?";
+                    break;
+                default:
+                    text = "I have never heard of that fruit...";
+            }
         },
+
+        addSite: function() {
+          var b = $('.add-site')
+          var a = $('#add-site');
+          a.on('keyup', function() {
+            $.ajax({
+                type: 'GET',
+                url: 'http://api.subely.dev/dbxusers/sub/verify/' + this.value,
+                data: 'data',
+                dataType: 'json',
+                success: function (response) {
+                  console.log(response);
+                  b.text('Create Site');
+                  b.removeClass('btn-default').addClass('btn-primary');
+                  $(".site-add-message").text("This subdomain is available");
+                  $(".site-add-message").css({"color": "green"});
+                },
+                error: function(response) {
+                  b.text('Check');
+                  b.removeClass('btn-primary').addClass('btn-default');
+                  $(".site-add-message").css({"color": "red"});
+                  $(".site-add-message").text("This subdomain is not available :(");
+                  console.log('not');
+                }
+            });
+          });
+          b.click(function(){
+              console.log(a.val());
+              $.post("http://api.subely.dev/dbxusers/add/subs",
+              {
+                  access_token: "tSGmeLHfhLrc0QFWLXv7WCWRrWmPbFuAv8ldfns1",
+                  user_id: "83106148-24ec-49af-b0fb-65b476d63032",
+                  sub_domain: a.val(),
+                  provider: "dropbox",
+                  www: "/Apps/subely"+a.val()
+              },
+              function(data, status){
+                console.log(data);
+              });
+          });
+
+
+
+        },
+
+        fillSubs: function() {
+
+          $.ajax({
+              type: 'GET',
+              url: 'http://api.subely.dev/dbxusers/get/subs/83106148-24ec-49af-b0fb-65b476d63032?access_token=4kUCGwiaznaw482kWOs4sCCALJ8BANO0sD65b2aF',
+              data: 'data',
+              dataType: 'json',
+              success: function (response) {
+                // console.log(response);
+                var data = response.data;
+                  $.each(data, function(index, element) {
+                    // console.log(data[index]);
+                    $('#subs-table').after('<tr class="">laskdfjlk</tr>');
+                    var $tr = $('<tr>').append(
+                      $('<td>').html('<a href="http://'+data[index].sub_domain+'.subely.me">' + data[index].sub_domain + '.subely.me</a>'),
+                      $('<td>').html('<i class="fa fa-check" aria-hidden="true"></i>'),
+                      $('<td>').text('[' + data[index].provider + ']/' + data[index].www),
+                      $('<td>').text(moment(data[index].created_at).fromNow()),
+                      $('<td>').html($('<div style="float: right;">').html('<button data-id="'+ data[index].sub_id +'" type="button" class="btn btn-xs btn-danger delete-sub">Delete</button>'))
+                    ).appendTo('#subs-table');
+
+                    // $('body').append($('<div>', {
+                      //     text: element.name
+                      // }));
+                  });
+
+                  // delete btn
+                  var $delete_sub = $('.delete-sub');
+                  $delete_sub.on("click", function() {
+                    var current_sub = this.getAttribute('data-id');
+
+                    $.ajax({
+                        type: 'GET',
+                        url: 'http://api.subely.dev/dbxusers/delete/sub/' + current_sub + '?access_token=4kUCGwiaznaw482kWOs4sCCALJ8BANO0sD65b2aF',
+                        data: 'data',
+                        dataType: 'json',
+                        success: function (response) {
+                          console.log(response);
+                          location.reload();
+                        }
+                    });
+                  });
+              }
+          });
+
+        },
+
         checkLogin: function() {
           var path = window.location.pathname;
           if (!Cookies.get('dbxtoken')){
@@ -338,7 +444,6 @@ var Actions = {
                   $('table').toggleClass("card"); //you can list several class names
                   e.preventDefault();
                 });
-
 
             // Login
             var a = $("#login-form");
@@ -603,6 +708,9 @@ window.addEventListener("popstate", function(a) {
 }),
 
 $(document).ready(function() {
+    if(currentView === 'home'){
+      Components.fillSubs();
+    }
     $("body").delegate('a[data-change-view="true"]', "click", function() {
         var a = $(this).attr("href");
         return Actions.changeView(a), !1
