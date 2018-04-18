@@ -20,7 +20,13 @@ var Actions = {
 
             if ("home" == a) {
               ($("body").addClass("home"), $("#header").removeClass("header-portable"))
-            } else if ("portable" == sections[a].headerType) {
+            }else if("about" == a){
+                ($("body").addClass("about"), $("#header").addClass("header-portable"))
+            }else if("team_member" == a){
+                ($("body").addClass("team-member"), $("#header").addClass("header-portable"))
+            }else if("single_team_member" == a){
+                ($("body").addClass("single-team-member"), $("#header").addClass("header-portable"))
+            }else if ("portable" == sections[a].headerType) {
               ($("body").addClass("home"), $("#header").addClass("header-portable"))
             } else {
               ($("body").removeClass("home"), $("#header").addClass("header-portable"))
@@ -98,7 +104,7 @@ var Actions = {
                   d.find("li.active").removeClass("active"),
                   b.find("a[href=" + a + "]").parent("li").addClass("active"),
                   d.find("a[href=" + a + "]").parent("li").addClass("active"),
-                  !$("body").hasClass("home")// || !$("body").hasClass("home")
+                  !$("body").hasClass("home")// || !$("body").hasClass("home"),
                 ) {
                 var e = b.find("li.active");
                 c.css({
@@ -488,8 +494,28 @@ var titleBase = document.title,
           scheme: "dark",
           ajax: !0,
           external: !1,
-          loaded: !1,
-          headerType: "portable"
+          loaded: !1
+        },
+        team_member: {
+          index: 8,
+          name: "Team Member",
+          "name-pl": "Portfolio",
+          target: "team_member.html",
+          color: "blue",
+          scheme: "dark",
+          ajax: !0,
+          external: !1,
+          loaded: !1
+        },
+        single_team_member: {
+          index: 11,
+          name: "Single Team Member",
+          "name-pl": "Portfolio",
+          target: "single_team_member.html",
+          color: "red",
+          scheme: "dark",
+          ajax: !0,
+          external: !1
         },
         contact: {
             index: 6,
