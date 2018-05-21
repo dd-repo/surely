@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Meta -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="description" content="A different hosting service">
+        <meta name="keywords" content="Subely, sub, hosting, dropbox hosting, simple hosting, free hosting, flatfile hosting">
+        <meta name="author" content="Subely Co">
+        <!-- Title -->
+        <title>Subely</title>
+        <!-- Favicons -->
+        <link rel="shortcut icon" href="themes/assets/img/">
+        <link rel="apple-touch-icon" href="themes/assets/img/favicon_60x60.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="themes/assets/img/favicon_76x76.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="themes/assets/img/favicon_120x120.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="themes/assets/img/favicon_152x152.png">
+        <!-- Google Web Fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,300,100,700' rel='stylesheet' type='text/css'>
+        <!-- CSS Styles -->
+        <link rel="stylesheet" href="themes/assets/css/styles.css" />
+        <!-- CSS Animations -->
+        <link rel="stylesheet" href="themes/assets/css/animate.css" />
+        <!-- CSS Template -->
+        <!-- <link rel="stylesheet" href="assets/css/base.min.css" /> -->
+        <link rel="stylesheet" href="themes/assets/css/base.css" />
+    </head>
+    <body class="site-loaded home" data-scheme="dark" data-color="green">
+        <div id="app">
+        </div>
+        <script src = "index.js"></script>
+        <!-- JS Libraries -->
+        <script src="themes/assets/js/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+        <!-- JS Plugins -->
+        <script src="themes/assets/js/plugins.js"></script>
+        <!-- JS Core -->
+        <script src="themes/assets/js/js.cookie.js"></script>
+        <!--<script src="/themes/assets/js/core.js"></script>-->
+
+        <script>
+        $(document).ready(function(){
+            $("[url_data]").click(function(){
+                $("#main-nav ul li").removeAttr("class");
+                $(this).closest("li").attr("class","active");
+                $("body").removeAttr('class').attr('class','site-loaded '+$(this).attr('url_data'));
+                if($(this).attr('url_data')=='home'){
+                    $('header').removeAttr('class');
+                }
+                else{
+                    $('header').attr('class','header-portable');
+                }
+            });
+        });
+        function slideUpdateView(a) {
+            var b = a.find(".swiper-slide-active"),
+                c = a.find(".swiper-bgs"),
+                d = b.data("scheme"),
+                e = b.data("color"),
+                f = c.find(".active"),
+                g = c.find('div[data-bg="' + b.data("bg") + '"]');
+            f.removeClass("active"), g.addClass("active"), setColorScheme(d, e)
+        }
+        function setColorScheme(a, b) {
+            //$("body").attr("data-scheme", a), $("body").attr("data-color", b)
+        }
+        $(".bg-swiper").owlCarousel({
+            slideSpeed: 3e3,
+            singleItem: !0,
+            autoPlay: 4500,
+            transitionStyle: "fade",
+            mouseDrag: !1,
+            touchDrag: !1,
+            touchRatio: 0
+        })
+        var a = $(".text-swiper");
+        if (a.length > 0) {
+            new Swiper(".text-swiper", {
+                speed: 400,
+                autoplay: 2500,
+                loop: !0
+            })
+        }
+        </script>
+    </body>
+</html>
